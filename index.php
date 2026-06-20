@@ -1,0 +1,119 @@
+<?php
+// PINDAHKAN KE BARIS PALING ATAS - Berhasil memperbaiki error di sumber [1]
+session_start();
+?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlyPets Clone - Toko Hewan Terpercaya</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- Overlay untuk latar belakang saat keranjang terbuka (Gaya Nike) -->
+<div id="overlay" class="overlay" onclick="closeCart()"></div>
+
+<!-- NAVBAR -->
+<header>
+    <div class="logo">OnlyPets</div>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Produk</a>
+        <a href="#">Kategori</a>
+
+        <?php
+        // Logika login sudah sesuai dengan tampilan di sumber [2]
+        if(isset($_SESSION['login'])){
+        ?>
+            <span class="user">
+                Halo, <?php echo $_SESSION['nama']; ?>
+            </span>
+            <a href="logout.php">Logout</a>
+        <?php
+        } else {
+        ?>
+            <a href="login.php">Login</a>
+            <a href="register.php">Register</a>
+        <?php
+        }
+        ?>
+
+        <button onclick="openCart()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-fill" viewBox="0 0 16 16">
+             <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4z"/>
+            </svg> Keranjang
+        </button>
+    </nav>
+</header>
+
+<!-- HERO - Dibuat ke tengah dan elegan -->
+<section class="hero">
+    <div>
+        <h1>Kebutuhan Hewan Kesayangan Anda</h1>
+        <p>Makanan, vitamin dan perlengkapan hewan terbaik</p>
+        <button>Belanja Sekarang</button>
+    </div>
+</section>
+
+<!-- CATEGORY - Diarahkan ke tengah menggunakan CSS justify-content:center -->
+<section>
+    <h2>Kategori Produk</h2>
+    <div class="category">
+        <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fork-knife" viewBox="0 0 16 16">
+                <path d="M13 .5c0-.276-.226-.506-.498-.465-1.703.257-2.94 2.012-3 8.462a.5.5 0 0 0 .498.5c.56.01 1 .13 1 1.003v5.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5zM4.25 0a.25.25 0 0 1 .25.25v5.122a.128.128 0 0 0 .256.006l.233-5.14A.25.25 0 0 1 5.24 0h.522a.25.25 0 0 1 .25.238l.233 5.14a.128.128 0 0 0 .256-.006V.25A.25.25 0 0 1 6.75 0h.29a.5.5 0 0 1 .498.458l.423 5.07a1.69 1.69 0 0 1-1.059 1.711l-.053.022a.92.92 0 0 0-.58.884L6.47 15a.971.971 0 1 1-1.942 0l.202-6.855a.92.92 0 0 0-.58-.884l-.053-.022a1.69 1.69 0 0 1-1.059-1.712L3.462.458A.5.5 0 0 1 3.96 0z"/>
+             </svg><br>Makanan Hewan</div>
+        <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
+  <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
+</svg><br>Aksesoris</div>
+        <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-capsule" viewBox="0 0 16 16">
+                <path d="M1.828 8.9 8.9 1.827a4 4 0 1 1 5.657 5.657l-7.07 7.071A4 4 0 1 1 1.827 8.9Zm9.128.771 2.893-2.893a3 3 0 1 0-4.243-4.242L6.713 5.429z"/>
+             </svg><br>Vitamin</div>
+        <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box2-fill" viewBox="0 0 16 16">
+  <path d="M3.75 0a1 1 0 0 0-.8.4L.1 4.2a.5.5 0 0 0-.1.3V15a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V4.5a.5.5 0 0 0-.1-.3L13.05.4a1 1 0 0 0-.8-.4zM15 4.667V5H1v-.333L1.5 4h6V1h1v3h6z"/>
+</svg><br>Alat Hewan</div>
+    </div>
+</section>
+
+<!-- PRODUCT - Kartu produk dengan shadow elegan -->
+<section>
+    <h2>Produk Kami</h2>
+    <div class="products">
+        <div class="card">
+            <img src="images/makanan/contoh.jpg" alt="Makanan Kucing">
+            <h3>Makanan Kucing</h3>
+            <p>Rp 50.000</p>
+            <button onclick="addCart('Makanan Kucing', 50000)">Tambah</button>
+        </div>
+
+        <div class="card">
+            <img src="images/alat/contoh.jpg" alt="Kandang Hewan">
+            <h3>Kandang Hewan</h3>
+            <p>Rp 150.000</p>
+            <button onclick="addCart('Kandang Hewan', 150000)">Tambah</button>
+        </div>
+
+        <div class="card">
+            <img src="images/aksesoris/contoh.jpg" alt="Kalung Hewan">
+            <h3>Kalung Hewan</h3>
+            <p>Rp 30.000</p>
+            <button onclick="addCart('Kalung Hewan', 30000)">Tambah</button>
+        </div>
+    </div>
+</section>
+
+<!-- CART SIDEBAR - Ditambahkan tombol Close (X) agar bisa keluar -->
+<div id="cart" class="cart">
+    <span class="close-cart" onclick="closeCart()">&times;</span>
+    <h2>Keranjang Anda</h2>
+    <div id="cartItems"></div>
+    <h3>Total : Rp <span id="total">0</span></h3>
+    <button class="checkout-btn" onclick="checkout()">Checkout Sekarang</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,342 @@
+
+*{
+
+margin:0;
+padding:0;
+box-sizing:border-box;
+
+font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;;
+
+}
+
+
+
+header{
+
+
+height:70px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:0 50px;
+
+background:#ffffff;
+
+box-shadow:0 2px 10px #ddd;
+
+
+}
+
+
+.logo{
+
+font-size:28px;
+
+font-weight:bold;
+
+color:#ff8c00;
+
+}
+
+
+nav a{
+
+margin:15px;
+
+text-decoration:none;
+
+color:black;
+
+}
+
+
+
+button{
+
+
+padding:10px 20px;
+
+border:none;
+
+background:#ff8c00;
+
+color:white;
+
+border-radius:10px;
+
+cursor:pointer;
+
+
+}
+
+
+
+
+
+.hero {
+    height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Konten hero ke tengah layar */
+    text-align: center;
+    padding: 0 20px;
+    background: #fff4df; /* Warna krem yang sudah Anda gunakan */
+}
+
+.hero h1 {
+    font-size: 50px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+
+.hero p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+section {
+    padding: 60px 50px; /* Memberikan ruang lebih luas agar terlihat lega/elegan */
+    text-align: center; /* Menengahkan judul h2 secara otomatis */
+}
+
+h2 {
+    margin-bottom: 40px;
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+}
+
+
+
+.category {
+    display: flex;
+    gap: 25px;
+    justify-content: center; /* Menarik semua kotak kategori ke tengah */
+    flex-wrap: wrap; /* Agar rapi saat dibuka di handphone */
+}
+
+
+
+.category div {
+    width: 180px;
+    padding: 35px 20px;
+    text-align: center;
+    background: #ffffff;
+    border-radius: 20px; /* Lebih bulat agar terlihat modern */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* Shadow halus untuk kesan elegan */
+    transition: transform 0.3s ease; /* Efek halus saat disentuh mouse */
+    cursor: pointer;
+}
+
+
+
+.category div:hover {
+    transform: translateY(-10px); /* Efek melayang saat hover */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+
+
+.products {
+    display: flex;
+    gap: 30px;
+    justify-content: center; /* Menengahkan kartu produk */
+    flex-wrap: wrap;
+}
+
+
+
+.card {
+    width: 280px;
+    padding: 20px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    text-align: center; /* Menengahkan teks di dalam kartu */
+}
+
+
+
+.card img {
+    border-radius: 15px; /* Membuat gambar produk tidak kaku */
+    margin-bottom: 15px;
+}
+
+
+
+.card h3{
+
+margin:15px 0;
+
+}
+
+
+.close-cart {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    transition: 0.3s;
+    line-height: 1;
+}
+
+.close-cart:hover {
+    color: #ff8c00; /* Berubah warna ke oranye khas OnlyPets saat hover */
+}
+
+
+.cart{
+
+
+position:fixed;
+
+right:-400px;
+
+top:0;
+
+width:350px;
+
+height:100%;
+
+background:white;
+
+padding:25px;
+
+box-shadow:0 0 20px #aaa;
+
+transition:.4s;
+
+
+}
+
+
+
+.cart.active{
+
+right:0;
+
+}
+
+
+.cart button{
+
+margin-top:20px;
+
+width:100%;
+
+
+}
+
+
+
+@media(max-width:700px){
+
+
+.products{
+
+flex-direction:column;
+
+}
+
+
+.category{
+
+flex-direction:column;
+
+}
+
+}
+.user{
+
+
+font-weight:bold;
+
+margin-left:15px;
+
+color:#ff8c00;
+
+
+}
+
+
+nav{
+
+display:flex;
+
+align-items:center;
+
+gap:25px;
+
+
+}
+
+
+nav a{
+
+
+margin:0;
+
+}
+
+.login-page {
+    background-color: #fff4df; /* Warna krem yang sama dengan hero section Anda */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.login-container {
+    width: 350px;
+    padding: 40px;
+    background: #ffffff;
+    border-radius: 15px; /* Sama dengan gaya .card Anda */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.login-container h2 {
+    color: #ff8c00; /* Warna oranye logo Anda */
+    margin-bottom: 25px;
+    font-size: 24px;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+}
+
+.login-container input:focus {
+    border-color: #ff8c00;
+}
+
+/* Menggunakan gaya button yang sudah Anda buat */
+.login-container button {
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.login-footer {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.login-footer a {
+    color: #ff8c00;
+    text-decoration: none;
+    font-weight: bold;
+}

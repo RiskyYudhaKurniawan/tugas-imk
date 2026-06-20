@@ -1,0 +1,117 @@
+services:
+
+
+  web:
+
+    build: .
+
+    container_name: onlypets_web
+
+
+    ports:
+
+      - "8080:80"
+
+
+    volumes:
+
+      - .:/var/www/html
+
+
+    depends_on:
+
+      - database
+
+
+
+
+
+  database:
+
+
+    image: mysql:8
+
+
+    container_name: onlypets_mysql
+
+
+    restart: always
+
+
+
+    environment:
+
+
+      MYSQL_ROOT_PASSWORD: root
+
+
+      MYSQL_DATABASE: onlypets
+
+
+
+    ports:
+
+
+      - "3306:3306"
+
+
+
+    volumes:
+
+
+      - mysql_data:/var/lib/mysql
+
+
+      - ./database/onlypets.sql:/docker-entrypoint-initdb.d/onlypets.sql
+
+
+
+
+
+  phpmyadmin:
+
+
+    image: phpmyadmin/phpmyadmin
+
+
+    container_name: onlypets_phpmyadmin
+
+
+
+    restart: always
+
+
+
+    ports:
+
+
+      - "8081:80"
+
+
+
+    environment:
+
+
+      PMA_HOST: database
+
+
+      PMA_USER: root
+
+
+      PMA_PASSWORD: root
+
+
+
+    depends_on:
+
+
+      - database
+
+
+
+
+
+volumes:
+
+
+  mysql_data:
