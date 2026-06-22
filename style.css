@@ -340,3 +340,15 @@ margin:0;
     text-decoration: none;
     font-weight: bold;
 }
+.products .card img {
+    width: 100%; 
+    height: 200px; /* Sesuaikan angka ini jika ingin gambar lebih tinggi/pendek */
+    object-fit: cover; 
+    border-radius: 10px; 
+    margin-bottom: 15px; 
+}
+
+/* Memastikan konten yang kebesaran dipotong mengikuti batas kartu */
+.products .card {
+    overflow: hidden; 
+}
