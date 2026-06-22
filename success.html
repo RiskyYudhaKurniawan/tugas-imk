@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Status Pesanan - OnlyPets</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: Arial, sans-serif;}
+        .success-card { background: white; width: 350px; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.2); text-align: center; }
+        .success-header { background: #0081f2; color: white; padding: 30px 20px; border-bottom: 2px solid #0073d9;}
+        .success-header .icon { background: #ffc107; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 30px; font-weight: bold; margin: 0 auto 15px; color: white;}
+        .success-body { padding: 20px; }
+        .info-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px; color: #555; }
+        .btn-home { display: inline-block; background: #ff8c00; color: white; text-decoration: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; margin-top: 15px; width: 90%; }
+    </style>
+</head>
+<body>
+
+<div class="success-card">
+    <div class="success-header">
+        <div class="icon">✓</div>
+        <!-- ID titleStatus ditambahkan di sini -->
+        <h2 id="titleStatus" style="margin: 0; font-size: 22px;">Payment Success!</h2>
+        <!-- ID descStatus ditambahkan di sini -->
+        <p id="descStatus" style="font-size: 14px; margin-top: 10px; line-height: 1.4;">Transaksi berhasil dibayar melalui metode pembayaran pilihan Anda.</p>
+    </div>
+    
+    <div class="success-body">
+        <h2 style="color: #ff8c00; margin-bottom: 20px;" id="finalTotal">Rp 0</h2>
+        
+        <div class="info-row">
+            <span>Metode</span>
+            <strong id="displayMetode">E-Wallet</strong>
+        </div>
+        <div class="info-row">
+            <span>Status</span>
+            <strong id="statusBadge" style="color: #03ac0e;">SUKSES</strong>
+        </div>
+
+        <a href="index.html" class="btn-home">Kembali ke Home</a>
+    </div>
+</div>
+
+<script>
+    // 1. Tampilkan Total Harga yang dibayar
+    const totalDiterima = localStorage.getItem('lastTotal');
+    if (totalDiterima) {
+        document.getElementById('finalTotal').innerText = totalDiterima;
+    }
+
+    // 2. Cek Metode Pembayaran untuk Mengubah Tampilan
+    const metodeDiterima = localStorage.getItem('metodePembayaran') || "Transfer";
+    document.getElementById('displayMetode').innerText = metodeDiterima;
+
+    // 3. LOGIKA COD (Berubah menjadi "Pesanan Sedang Diproses")
+    if (metodeDiterima === "COD") {
+        document.getElementById('titleStatus').innerText = "Pesanan Sedang Diproses";
+        document.getElementById('descStatus').innerText = "Silakan siapkan uang tunai sejumlah total tagihan saat kurir OnlyPets tiba di alamat Anda.";
+        document.getElementById('statusBadge').innerText = "MENUNGGU PEMBAYARAN";
+        document.getElementById('statusBadge').style.color = "#ff8c00"; // Ubah warna jadi oranye
+    }
+</script>
+
+</body>
+</html>

@@ -1,7 +1,15 @@
 let cart = [];
 
 // 1. Fungsi Tambah ke Keranjang
-function addCart(nama, harga) {
+function addCart(nama, harga, gambar) {
+    let statusLogin = localStorage.getItem("isLoggedIn");
+    
+    // Jika tidak ada data login atau statusnya bukan "true"
+    if (statusLogin !== "true") {
+        alert("Silakan login terlebih dahulu untuk menambahkan barang ke keranjang!");
+        window.location.href = "login.html"; // Arahkan pengguna ke halaman login
+        return; // Hentikan fungsi di sini agar barang tidak dimasukkan ke keranjang
+    }
     let itemDitemukan = cart.find(item => item.nama === nama);
 
     if (itemDitemukan) {
@@ -10,10 +18,11 @@ function addCart(nama, harga) {
         cart.push({
             nama: nama,
             harga: harga,
-            jumlah: 1
+            jumlah: 1,
+            gambar: gambar // <--- 2. Tambahkan baris ini agar letak foto disimpan
         });
     }
-    
+
     updateCart();
     openCart();
 }
@@ -99,5 +108,57 @@ function checkout() {
     localStorage.setItem("lastTotal", totalBelanja.toLocaleString('id-ID')); 
 
     // Pindah ke halaman checkout
-    window.location.href = "checkout.php";
+    window.location.href = "checkout.html";
+}
+// Mengecek status login saat halaman dimuat
+document.addEventListener("DOMContentLoaded", function() {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    const namaUser = localStorage.getItem("namaUser");
+
+    if (isLoggedIn === "true") {
+        // Jika sudah login: Sembunyikan 'Login', tampilkan 'Halo [User]' dan 'Logout'
+        document.getElementById("nav-login").style.display = "none";
+        
+        document.getElementById("nav-user").style.display = "inline";
+        document.getElementById("nama-user").innerText = namaUser;
+        document.getElementById("nav-logout").style.display = "inline";
+    }
+});
+
+// Fungsi untuk proses Logout
+function logout() {
+    // Menghapus data login dari browser
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("namaUser");
+    
+    window.location.reload(); 
+}
+
+function prosesLogin() {
+    // 1. Ambil email yang sedang diketik user saat login
+    let emailYangDiketik = document.getElementById("emailInput").value;
+
+    // Pengecekan jika email kosong
+    if(emailYangDiketik.trim() === "") {
+        alert("Masukkan email Anda!");
+        return;
+    }
+
+    // 2. Cari nama di memori browser BERDASARKAN email tersebut
+    let namaAkun = localStorage.getItem(emailYangDiketik);
+
+    // 3. Jika email tidak ditemukan di memori (belum daftar)
+    if (!namaAkun) {
+        alert("Email tidak ditemukan. Silakan daftar terlebih dahulu!");
+        return;
+    }
+
+    // 4. Jika email ditemukan, lanjutkan proses login
+    localStorage.setItem("isLoggedIn", "true");
+    
+    // Set nama user yang sedang aktif agar dibaca oleh index.html dan checkout.html
+    localStorage.setItem("namaUser", namaAkun); 
+
+    alert("Login berhasil! Selamat datang, " + namaAkun);
+    window.location.href = "index.html"; 
 }

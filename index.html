@@ -20,30 +20,18 @@
     <nav>
         <a href="#">Home</a>
         <a href="#">Produk</a>
-        <a href="#">Kategori</a>
 
-        <?php
-        // Logika login sudah sesuai dengan tampilan di sumber [2]
-        if(isset($_SESSION['login'])){
-        ?>
-            <span class="user">
-                Halo, <?php echo $_SESSION['nama']; ?>
-            </span>
-            <a href="logout.php">Logout</a>
-        <?php
-        } else {
-        ?>
-            <a href="login.php">Login</a>
-            <a href="register.php">Register</a>
-        <?php
-        }
-        ?>
+        <!-- Menu Sebelum Login -->
+        <a href="login.html" id="nav-login">Login</a>
 
-        <button onclick="openCart()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-fill" viewBox="0 0 16 16">
-             <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4z"/>
-            </svg> Keranjang
-        </button>
+        <!-- Menu Sesudah Login (Disembunyikan sementara pakai CSS inline) -->
+        <span class="user" id="nav-user" style="display: none; font-weight: bold; color: #ff8c00;">
+            Halo, <span id="nama-user"></span>
+        </span>
+        <a href="#" id="nav-logout" style="display: none;" onclick="logout()">Logout</a>
+
+        <!-- Tombol Keranjang Tetap Ada -->
+        <button onclick="openCart()">🛒 Keranjang</button>
     </nav>
 </header>
 
@@ -80,24 +68,24 @@
     <h2>Produk Kami</h2>
     <div class="products">
         <div class="card">
-            <img src="images/makanan/9310022866203.jpg""" alt="Makanan Kucing">
+            <img src="images/makanan/9310022866203.jpg"" alt="Makanan Kucing">
             <h3>Makanan Kucing</h3>
             <p>Rp 50.000</p>
-            <button onclick="addCart('Makanan Kucing', 50000)">Tambah</button>
+            <button onclick="addCart('Makanan Kucing', 50000, 'images/makanan/9310022866203.jpg')">Tambah</button>
         </div>
 
         <div class="card">
             <img src="images/alat/b400156-cat-it-voyageur-100-small-pink-pink-kandang-kucing-1-1.jpg"" alt="Kandang Hewan">
             <h3>Kandang Hewan</h3>
             <p>Rp 150.000</p>
-            <button onclick="addCart('Kandang Hewan', 150000)">Tambah</button>
+            <button onclick="addCart('Kandang Hewan', 150000, 'images/alat/b400156-cat-it-voyageur-100-small-pink-pink-kandang-kucing-1-1.jpg')">Tambah</button>
         </div>
 
         <div class="card">
             <img src="images/aksesoris/images.jpg"" alt="Kalung Hewan">
             <h3>Kalung Hewan</h3>
             <p>Rp 30.000</p>
-            <button onclick="addCart('Kalung Hewan', 30000)">Tambah</button>
+            <button onclick="addCart('Kalung Hewan', 30000, 'images/aksesoris/images.jpg')">Tambah</button>
         </div>
     </div>
 </section>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Akun - OnlyPets</title>
+    <!-- Menghubungkan ke style.css agar tampilan elegan dan ke tengah -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="login-page">
+    <div class="login-container">
+        <h2 style="color: #ff8c00; margin-bottom: 20px;">Daftar Akun OnlyPets</h2>
+        
+        <!-- Tambahkan id="regNama" untuk menangkap input nama -->
+        <input type="text" id="regNama" placeholder="Nama Lengkap" required>
+        <input type="email" id="regEmail" placeholder="Email (contoh: kurnia@gmail.com)" required>
+        <input type="text" id="regAlamat" placeholder="Alamat Lengkap Rumah" required>
+        <input type="password" id="regPassword" placeholder="Password Baru" required>
+        
+        <!-- Tombol Daftar bertipe button untuk memicu JavaScript -->
+        <button type="button" onclick="prosesRegister()" style="width: 100%; padding: 15px; font-weight: bold; background: #ff8c00; color: white; border: none; border-radius: 8px; cursor: pointer; margin-top: 10px;">
+            Daftar Sekarang
+        </button>
+
+        <div class="login-footer" style="margin-top: 20px; font-size: 14px;">
+            Sudah punya akun? <a href="login.html" style="color: #ff8c00; text-decoration: none;">Masuk di sini</a>
+        </div>
+    </div>
+</div>
+<script>
+function prosesRegister() {
+    let namaUserBaru = document.getElementById("regNama").value;
+    // Tambahkan baris ini untuk mengambil email yang diketik
+    let emailUserBaru = document.getElementById("regEmail").value; 
+
+    if(namaUserBaru.trim() === "" || emailUserBaru.trim() === "") {
+        alert("Mohon isi Nama Lengkap dan Email terlebih dahulu!");
+        return;
+    }
+
+    // SIMPAN NAMA DENGAN MENGGUNAKAN EMAIL SEBAGAI KUNCI
+    // Contoh: localStorage.setItem("kurnia@gmail.com", "Kurnia");
+    localStorage.setItem(emailUserBaru, namaUserBaru);
+
+    alert("Pendaftaran berhasil! Silakan masuk dengan akun Anda.");
+    window.location.href = "login.html";
+}
+</script>
+</body>
+</html>

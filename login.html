@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - OnlyPets</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Pembungkus utama halaman agar berada di tengah -->
+<div class="login-page">
+    
+    <!-- HANYA BOLEH ADA SATU login-container -->
+    <div class="login-container">
+        <h2 style="color: #ff8c00; margin-bottom: 20px;">Login</h2>
+        
+        <!-- Input Form (Tanpa tag <form method="POST">) -->
+        <input type="email" id="emailInput" placeholder="Email (contoh: kurnia@gmail.com)" required>
+        
+        <input type="password" placeholder="Password" required>
+        
+        <!-- Tombol Masuk wajib bertipe "button" agar bisa menjalankan JavaScript -->
+        <button type="button" onclick="prosesLogin()" style="width: 100%; padding: 15px; font-weight: bold; background: #ff8c00; color: white; border: none; border-radius: 8px; cursor: pointer; margin-top: 10px;">
+            Masuk
+        </button>
+
+        <div class="login-footer" style="margin-top: 20px; font-size: 14px;">
+            Belum punya akun? <a href="register.html" style="color: #ff8c00; text-decoration: none;">Daftar</a>
+        </div>
+    </div>
+
+</div>
+
+<!-- Script untuk logika login statis (GitHub Pages) -->
+<script>
+function prosesLogin() {
+    // 1. Mengambil nama yang sudah didaftarkan sebelumnya dari memori
+    // Jika tidak ada data registrasi (pengguna langsung ke halaman login), gunakan "User" sebagai nama default
+    let namaAkun = localStorage.getItem("registeredName") || "User";
+
+    // 2. Set status login menjadi true
+    localStorage.setItem("isLoggedIn", "true");
+    
+    // 3. Set nama user yang sedang aktif agar dibaca oleh index.html
+    localStorage.setItem("namaUser", namaAkun); 
+
+    // 4. Mengarahkan kembali ke halaman utama
+    window.location.href = "index.html"; 
+}
+</script>
+
+</body>
+</html>

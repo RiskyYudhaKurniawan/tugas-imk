@@ -1,15 +1,9 @@
-<?php 
-session_start(); 
-// Pastikan user sudah login [2]
-if(!isset($_SESSION['login'])){
-    header("location:login.php");
-    exit;
-}
-?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout OnlyPets - Konfirmasi Pesanan</title>
     <link rel="stylesheet" href="style.css">
     <style>
@@ -47,12 +41,17 @@ if(!isset($_SESSION['login'])){
         <!-- Alamat Pengiriman -->
         <div class="card-tkpd">
             <h3>📍 Alamat Pengiriman</h3>
-            <div class="address-box">
-                <div>
-                    <b><?php echo $_SESSION['nama']; ?></b>
-                    <p><?php echo $_SESSION['alamat'] ?? 'Alamat belum diatur'; ?></p>
-                </div>
-            </div>
+        <div class="address-box">
+        <div>
+            <!-- ID ini digunakan agar JS bisa memanggil nama user yang sedang login -->
+            <b id="namaPembeliCheckout" style="font-size: 16px;">User</b>
+            
+            <!-- Ini adalah alamat statis yang Anda minta -->
+            <p style="margin-top: 5px; line-height: 1.5;">Pendopo Jawa, Jl. Raya Pd. Ranggon, Kec. Cipayung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta, 13860 (PAGAR KAYU)</p>
+            
+            <p style="color: #888; font-size: 12px; margin-top: 5px;">Kontak: +62 8xx-xxxx-xxxx</p>
+        </div>
+    </div>
         </div>
         
         <!-- Daftar Produk -->
@@ -67,15 +66,14 @@ if(!isset($_SESSION['login'])){
     <!-- Sidebar Transaksi (Kanan) -->
     <div class="sidebar-content">
         <div class="card-tkpd">
-            <h3>Metode Pembayaran</h3>
-            <select style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 15px;">
-                <option>Pilih Pembayaran</option>
-                <option>BCA Virtual Account</option>
-                <option>GoPay</option>
-                <option>OVO</option>
-                <option>COD (Bayar di Tempat)</option>
-            </select>
-        </div>
+    <h3>Metode Pembayaran</h3>
+    <!-- Tambahkan id="metodeBayar" di sini -->
+    <select id="metodeBayar" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 15px;">
+        <option value="Transfer Bank">Transfer Bank</option>
+        <option value="E-Wallet">E-Wallet (GoPay/OVO)</option>
+        <option value="COD">COD (Bayar di Tempat)</option>
+    </select>
+</div>
 
         <div class="card-tkpd">
             <h3>Ringkasan Belanja</h3>
@@ -103,6 +101,11 @@ if(!isset($_SESSION['login'])){
 </div>
 
 <script>
+    const namaAktif = localStorage.getItem("namaUser") || "Pengguna Tamu";
+    
+    // 2. Menampilkan nama tersebut di atas alamat pengiriman
+    document.getElementById("namaPembeliCheckout").innerText = namaAktif;
+
     // Mengambil data keranjang yang disimpan di localStorage [3]
     const cart = JSON.parse(localStorage.getItem('checkout')) || [];
     const container = document.getElementById('checkoutProducts');
@@ -115,7 +118,7 @@ if(!isset($_SESSION['login'])){
             totalHarga += sub;
             container.innerHTML += `
                 <div class="product-list-item">
-                    <img src="images/makanan/contoh.jpg" alt="Product">
+                    <img src="${item.gambar}" alt="Product">
                     <div class="product-details">
                         <b style="font-size: 15px;">${item.nama}</b>
                         <p>${item.jumlah} barang x Rp ${item.harga.toLocaleString('id-ID')}</p>
@@ -138,9 +141,15 @@ if(!isset($_SESSION['login'])){
     localStorage.setItem('lastTotal', grandTotal.toLocaleString('id-ID'));
 
     function bayarSekarang() {
-        alert("Mengalihkan ke halaman pembayaran...");
-        window.location.href = 'success.php';
-    }
+    // 1. Ambil metode pembayaran yang dipilih user
+    let metodePilihan = document.getElementById("metodeBayar").value;
+
+    // 2. Simpan ke localStorage agar bisa dibaca oleh success.html
+    localStorage.setItem("metodePembayaran", metodePilihan);
+
+    
+    window.location.href = 'success.html';
+}
 </script>
 
 </body>

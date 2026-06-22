@@ -352,3 +352,66 @@ margin:0;
 .products .card {
     overflow: hidden; 
 }
+@media screen and (max-width: 768px) {
+    
+    /* 1. Merapikan Navbar agar teks tidak bertumpuk */
+    header {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
+    header nav {
+        margin-top: 15px;
+        display: flex;
+        flex-wrap: wrap; /* Menu akan turun ke baris baru jika layar sempit */
+        justify-content: center;
+        gap: 15px;
+    }
+
+    /* 2. Mengubah daftar Produk dan Kategori menjadi atas-bawah */
+    /* Sesuaikan nama class ini jika di web Anda berbeda (misal: .product-list) */
+    .products, .kategori-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .products .card, .kategori .card {
+        width: 90%; /* Memaksa kartu produk mengambil 90% lebar layar HP */
+        margin-bottom: 20px;
+    }
+
+    /* 3. Menyesuaikan Kotak Login & Register */
+    /* Mengubah ukuran 450px yang fix menjadi fleksibel di HP */
+    .login-container {
+        width: 90% !important; 
+        padding: 25px;
+    }
+
+    /* 4. Menyesuaikan Halaman Checkout (Gaya Tokopedia) */
+    /* Mengubah 2 kolom (kiri-kanan) menjadi 1 kolom (atas-bawah) */
+    .checkout-wrapper {
+        flex-direction: column;
+        padding: 10px;
+    }
+    .main-content, .sidebar-content {
+        flex: none;
+        width: 100%; /* Memenuhi lebar layar HP */
+    }
+    .sidebar-content {
+        position: relative; /* Menghilangkan efek sticky (menempel) di HP */
+        top: 0;
+    }
+}
+
+/* =======================================================
+   PENGATURAN LAYAR SANGAT KECIL (Misal: iPhone SE < 400px)
+   ======================================================= */
+@media screen and (max-width: 400px) {
+    .login-container {
+        width: 95% !important;
+        padding: 15px;
+    }
+    .products .card {
+        width: 100%; 
+    }
+}
